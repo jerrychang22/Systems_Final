@@ -1,0 +1,46 @@
+Spaceteam by Jerry Chang (Period 10)
+
+Description: 
+  Spaceteam is a cooperative mobile game where each player is given a unique control panel. 
+Each control panel has switches, levers, and buttons all labeled with technobabble.
+Each player is then given a command which they cannot themselves fulfill and must communicate
+with the other members to execute the commands.
+Each of these commands is time sensitive.
+The goal of the game is to last as long as possible without failing a certain number of commands.
+This project will be a PC version using C and its networking capabilities
+
+Link for more : https://en.wikipedia.org/wiki/Spaceteam
+
+User Interface:
+  Each user is shown a control panel within the terminal with varying buttons, levers, and switches (ASCII*).
+ Each of these are labelled with technobabble along with appropriate keys to press on a keyboard.
+ At the top will be a command that is generated, that the user will need to tell the others.
+ All the user needs to do is press keyboard keys.
+ 
+ *I may choose to use a library for the graphical aspect but unlikely (unless it's easier)
+ 
+Technical Aspects:
+  All users will be running the same program on different computers
+
+  Components :
+    Networking to transmit key presses from one computer to all others
+    Networking to generate commands for other users (creates commands based on what 
+                                                    modules exist on other control panels)
+    *Semaphores for keeping track of module access
+    String parsing for reading key commands
+    
+    *May be unnecessary
+  
+  Data Structures and Algorithms :
+    Most of the structures and algorithms should be network based and sorting through
+    how and where data should be going. 
+    There should be minimal processing by the game (Generating commands, picking modules)
+    
+Timeline :
+  1/9 : Initialize
+  1/13 : Get single user interface working
+  1/16 : Begin networking mess
+  1/20 : Finish networking mess
+  1/20 : Begin advanced functionality if deemed necessary
+  1/20 : Begin bug-squashing and cleanup
+  1/23 : Finish
