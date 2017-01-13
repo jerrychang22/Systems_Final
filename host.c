@@ -4,8 +4,65 @@
 
 #include "network.h"
 
-int main(){
-  
+void process( char * s );
+void sub_server( int sd );
 
+int main() {
+
+  //-------------------------------------Setup host--------------------------//
+  //Port
+  printf("Port : ");
+  char portinput[8];
+  fgets(portinput, 8, stdin);
+  //if () {} //Check for valid port
+  int port = atoi(portinput);
+
+
+  //Setup connections
+  int sd, connection;
+
+  sd = server_setup(port);
+
+  //Connect users
+  //While game has not started, allow connections
+  while (1) {
+
+    connection = server_connect( sd );
+
+    int f = fork();
+    if ( f == 0 ) {
+
+      close(sd);
+      sub_server( connection );
+
+      exit(0);
+    }
+    else {
+      close( connection );
+    }
+  }
+  //--------------------------------------------------------------------------------
+
+  
   return 0;
+}
+
+
+void sub_server( int sd ) {
+
+  char buffer[MESSAGE_BUFFER_SIZE];
+  while (read( sd, buffer, sizeof(buffer) )) {
+
+    printf("[SERVER %d] received: %s\n", getpid(), buffer );
+    process( buffer );
+    write( sd, buffer, sizeof(buffer));    
+  }
+  
+}
+void process( char * s ) {
+
+  while ( *s ) {
+    *s = (*s - 'a' + 13) % 26 + 'a';
+    s++;
+  }
 }
