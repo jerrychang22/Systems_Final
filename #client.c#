@@ -31,7 +31,7 @@ int main(){
   
   int sd;
 
-  sd = client_connect(ipinput, port );
+  sd = client_connect(ipinput, port);
 
   char buffer[MESSAGE_BUFFER_SIZE];
   

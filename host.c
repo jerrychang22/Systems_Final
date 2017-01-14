@@ -10,6 +10,9 @@ void sub_server( int sd );
 int main() {
 
   //-------------------------------------Setup host--------------------------//
+
+  int gameStart = 1;
+
   //Port
   printf("Port : ");
   char portinput[8];
@@ -25,7 +28,7 @@ int main() {
 
   //Connect users
   //While game has not started, allow connections
-  while (1) {
+  while (!gameStart) {
 
     connection = server_connect( sd );
 
@@ -51,18 +54,18 @@ int main() {
 void sub_server( int sd ) {
 
   char buffer[MESSAGE_BUFFER_SIZE];
+
+  //while (!gameStart){  //Before game has started, allow chat
   while (read( sd, buffer, sizeof(buffer) )) {
 
     printf("[SERVER %d] received: %s\n", getpid(), buffer );
-    process( buffer );
+    chat( buffer );
     write( sd, buffer, sizeof(buffer));    
   }
+  //}
+}
+void chat( char * s ) {
   
 }
-void process( char * s ) {
 
-  while ( *s ) {
-    *s = (*s - 'a' + 13) % 26 + 'a';
-    s++;
-  }
-}
+
