@@ -32,11 +32,12 @@ int main(){
   int sd;
 
   sd = client_connect(ipinput, port );
+  printf("Connected to %s:%s\n", ipinput, port);
 
   char buffer[MESSAGE_BUFFER_SIZE];
-  
+
   while (1) {
-    printf("enter message: ");
+    printf("Enter command: ");
     fgets( buffer, sizeof(buffer), stdin );
     char *p = strchr(buffer, '\n');
     *p = 0;

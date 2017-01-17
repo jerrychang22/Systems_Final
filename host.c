@@ -12,6 +12,9 @@ int main() {
   //-------------------------------------Setup host--------------------------//
 
   int gameStart = 1;
+  int numPlayers = 0;
+  int currentPlayers = 0;
+
 
   //Port
   printf("Port : ");
@@ -21,6 +24,13 @@ int main() {
   int port = atoi(portinput);
 
 
+  //Players
+  printf("Number of players : ");
+  char playercount[8];
+  fgets(playercount, 8, stdin);
+  //if () {} //Check for valid int
+  numPlayers = atoi(playercount);
+
   //Setup connections
   int sd, connection;
 
@@ -28,7 +38,7 @@ int main() {
 
   //Connect users
   //While game has not started, allow connections
-  while (!gameStart) {
+  while (currentPlayers < numPlayers) {
 
     connection = server_connect( sd );
 
@@ -41,9 +51,13 @@ int main() {
       exit(0);
     }
     else {
+      currentPlayers++;
+      //Add pid of child to list to access later
       close( connection );
     }
   }
+  
+  gameStart = 1; //End listening and start game
   //--------------------------------------------------------------------------------
 
   
@@ -55,7 +69,7 @@ void sub_server( int sd ) {
 
   char buffer[MESSAGE_BUFFER_SIZE];
 
-  //while (!gameStart){  //Before game has started, allow chat
+  //while (!gameStart){  //Before game has started
   while (read( sd, buffer, sizeof(buffer) )) {
 
     printf("[SERVER %d] received: %s\n", getpid(), buffer );
@@ -64,6 +78,7 @@ void sub_server( int sd ) {
   }
   //}
 }
+
 void chat( char * s ) {
   
 }
