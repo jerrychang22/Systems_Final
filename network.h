@@ -10,4 +10,8 @@ int server_connect(int sd);
 
 int client_connect( char *host, int port );
 
+char *promptIP();
+int promptPort();
+int promptNumPlayers();
+
 #endif

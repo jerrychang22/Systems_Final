@@ -1,20 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 
 #include "network.h"
-
-void process( char * s );
-void sub_server( int sd );
+#include "game.h"
 
 int main() {
 
-  //-------------------------------------Setup host--------------------------//
-
-  int gameStart = 1;
   int numPlayers = 0;
-  int currentPlayers = 0;
-
+  int currentPlayers = 1;
 
   //Port
   printf("Port : ");
@@ -35,52 +30,38 @@ int main() {
   int sd, connection;
 
   sd = server_setup(port);
+  char buffer[MESSAGE_BUFFER_SIZE];
+  char buffer2[MESSAGE_BUFFER_SIZE];
+
 
   //Connect users
   //While game has not started, allow connections
   while (currentPlayers < numPlayers) {
 
     connection = server_connect( sd );
+    pthread_t clientInput;
+    pthread_create(&clientInput, NULL, serverWork, &connection);
 
+    //Fork and pipe
     int f = fork();
     if ( f == 0 ) {
+	while(1){
+		takeInput(buffer, connection);
+	}
 
-      close(sd);
-      sub_server( connection );
-
-      exit(0);
     }
     else {
       currentPlayers++;
-      //Add pid of child to list to access later
       close( connection );
     }
   }
-  
-  gameStart = 1; //End listening and start game
-  //--------------------------------------------------------------------------------
 
-  
-  return 0;
-}
-
-
-void sub_server( int sd ) {
-
-  char buffer[MESSAGE_BUFFER_SIZE];
-
-  //while (!gameStart){  //Before game has started
-  while (read( sd, buffer, sizeof(buffer) )) {
-
-    printf("[SERVER %d] received: %s\n", getpid(), buffer );
-    chat( buffer );
-    write( sd, buffer, sizeof(buffer));    
+  while (1) {
+  	takeInput(buffer2, sd);
   }
-  //}
-}
 
-void chat( char * s ) {
-  
+
+  return 0;
 }
 
 

@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "network.h"
+#include "game.h"
 
 int main(){
 
@@ -23,45 +24,22 @@ int main(){
   //if () {} //Check for valid port
   int port = atoi(portinput);
   
-  //--------------------------------------------------------------------------------
 
-  
-  
   //----------------------------Socket and Connect----------------------------------
   
   int sd;
 
   sd = client_connect(ipinput, port );
-  printf("Connected to %s:%s\n", ipinput, port);
+  printf("Connected to %s:%d\n", ipinput, port);
+
+  pthread_t serverRead;
+  pthread_create(&serverRead, NULL, clientWork, &sd);
 
   char buffer[MESSAGE_BUFFER_SIZE];
 
   while (1) {
-    printf("Enter command: ");
-    fgets( buffer, sizeof(buffer), stdin );
-    char *p = strchr(buffer, '\n');
-    *p = 0;
-  
-    write( sd, buffer, sizeof(buffer) );
-    read( sd, buffer, sizeof(buffer) );
-    printf( "received: %s\n", buffer );
+    takeInput(buffer, sd);
   }
-  
-
-
-
-
-
-
-  //--------------------------------------------------------------------------------
-
-
-  //-------------------------------Client-side functions---------------------------
-
-
-
-  //-------------------------------------------------------------------------------
-  
   
   
 

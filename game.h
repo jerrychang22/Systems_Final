@@ -27,4 +27,11 @@
 //
 
 
+void takeInput(char buffer[], int sd);
+
+void *clientWork(void *arg);
+
+void *serverWork(void *arg);
+
+
 #endif
