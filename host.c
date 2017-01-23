@@ -25,6 +25,7 @@ int main() {
   fgets(playercount, 8, stdin);
   //if () {} //Check for valid int
   numPlayers = atoi(playercount);
+  printf("Num players : %d", numPlayers);
 
   //Setup connections
   int sd, connection;
@@ -42,16 +43,13 @@ int main() {
     pthread_t clientInput;
     pthread_create(&clientInput, NULL, serverWork, &connection);
 
-    //Fork and pipe
+    //Fork
     int f = fork();
-    if ( f == 0 ) {
-	while(1){
-		takeInput(buffer, connection);
-	}
-
-    }
+    if ( f == 0 );
     else {
       currentPlayers++;
+      printf("Current players : %d\n", currentPlayers);
+      addNewPlayer( connection );
       close( connection );
     }
   }

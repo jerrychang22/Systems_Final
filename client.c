@@ -37,6 +37,11 @@ int main(){
 
   char buffer[MESSAGE_BUFFER_SIZE];
 
+
+  char command[256];
+
+
+
   while (1) {
     takeInput(buffer, sd);
   }

@@ -72,17 +72,15 @@ int client_connect( char *host , int port) {
 
 
 int promptPort(){
+	int port;
 	printf("Port : ");
-	char portinput[8];
-	fgets(portinput, 8, stdin);
-	int port = atoi(portinput);
+	scanf("%d", &port);
 	return port;
 }
 
 int promptNumPlayers(){
+	int numPlayers;
 	printf("Number of players : ");
-	char playercount[8];
-	fgets(playercount, 8, stdin);
-	int numPlayers = atoi(playercount);
+	scanf("%d", &numPlayers);
 	return numPlayers;
 }
