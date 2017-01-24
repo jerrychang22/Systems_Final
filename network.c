@@ -71,14 +71,14 @@ int client_connect( char *host , int port) {
 }
 
 
-int promptPort(){
+int promptPort() {
 	int port;
 	printf("Port : ");
 	scanf("%d", &port);
 	return port;
 }
 
-int promptNumPlayers(){
+int promptNumPlayers() {
 	int numPlayers;
 	printf("Number of players : ");
 	scanf("%d", &numPlayers);

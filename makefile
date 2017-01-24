@@ -19,5 +19,5 @@ game.o : game.c game.h network.h
 	gcc -c game.c
 
 clean:
-	rm *.o
-	rm *~
+	rm -f *.o
+	rm -f *~
