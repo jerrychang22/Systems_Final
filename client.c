@@ -35,15 +35,15 @@ int main(){
 
   struct clientpack args;
   args.sd = sd;
+  bzero(args.panelList, sizeof(args.panelList));
 
   pthread_t serverRead;
   pthread_create(&serverRead, NULL, clientWork, &args);
 
-  char buffer[MESSAGE_BUFFER_SIZE];
 
   while (1) {
+    char buffer[MESSAGE_BUFFER_SIZE] = {};
     takeInput(buffer, sd);
-    buffer[0] = 0;
   }
 
   return 0;

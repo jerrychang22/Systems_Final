@@ -2,11 +2,11 @@
 #define GAME_H
 
 #define MAX_PLAYER_LIMIT 8
-#define NUM_COMPONENTS 4
+#define NUM_COMPONENTS 3
 #define CHAR_LIMIT 256
-#define HEALTH 0
-#define COMMAND 1
-#define PANEL 2
+#define HEALTH 1
+#define COMMAND 2
+#define PANEL 3
 
 typedef struct packet {
     int type;
@@ -56,6 +56,9 @@ static char *objectList[24] = {"Sensor array",
                         "Field generator",
                         "Crystal capacitators",
                         "Vortex fluctuators",
-                        "Fluxtrunions"
+                        "Fluxtrunions",
+                        "Quantum bogosort",
+                        "Photon hyperdrive",
+                        ""
 };
 #endif

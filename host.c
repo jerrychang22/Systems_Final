@@ -13,7 +13,7 @@ int main() {
   //printf("%d\n", NUM_COMPONENTS);
 
   int numPlayers = 0;
-  int currentPlayers = 1;
+  int currentPlayers = 0;
 
   //Port
   printf("Port : ");
@@ -39,27 +39,12 @@ int main() {
   //Connect users
   //While game has not started, allow connections
   
-  /*
-  int i;
-  for (i = currentPlayers; i < numPlayers; i++) {
-    int f = fork();
-    if (f != 0) {
-      int connection = server_connect(sd);
-      pthread_t clientInput;
-      pthread_create(&clientInput, NULL, serverWork, &connection);
-      currentPlayers++;
-      printf("Current players: %d\n", currentPlayers);
-      addNewPlayer(connection);
-    }
-  }
-  */
   while (currentPlayers < numPlayers) {
 
     connection = server_connect( sd );
     pthread_t clientInput;
     pthread_create(&clientInput, NULL, serverWork, &connection);
 
-    //Fork
     int f = fork();
     if ( f != 0 ) {
       currentPlayers++;
@@ -70,6 +55,7 @@ int main() {
     }
   }
 
+  /*
   int x;
   if (fork() == 0) {
     connection = server_connect(sd);
@@ -87,14 +73,11 @@ int main() {
     pthread_create(&serverRead, NULL, clientWork, &args);
 
   }
+  */
 
   initializePanels();
-
-  while (1) {
-    takeInput(buffer, x);
-  }
+  initializeCommands();
+  while (1) {}
 
   return 0;
 }
-
-
