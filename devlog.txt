@@ -1,0 +1,26 @@
+jerryC -- 2017-1-04 15:12
+Initialize project
+
+jerryC -- 2017-1-05 15:20
+Setup client and host system
+
+jerryC -- 2017-1-06 18:41
+Initialize game files
+
+jerryC -- 2017-1-10 15:22
+Finish server and client system
+
+jerryC -- 2017-1-16 22:14
+Add game functions : Commands
+
+jerryC -- 2017-1-18 15:30
+Finish command system, begin panel system
+
+jerryC -- 2017-1-21 15:23
+Rewrite using threads
+
+jerryC -- 2017-1-22 18:51
+Begin ncurses
+
+jerryC -- 2017-1-24 6:00
+Submission

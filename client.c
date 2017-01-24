@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <pthread.h>
+#include <unistd.h>
 
 #include "network.h"
 #include "game.h"
+#include "window.h"
 
 int main(){
 
@@ -40,10 +43,13 @@ int main(){
   pthread_t serverRead;
   pthread_create(&serverRead, NULL, clientWork, &args);
 
-
+  init_screen();
   while (1) {
+   
+      
     char buffer[MESSAGE_BUFFER_SIZE] = {};
-    takeInput(buffer, sd);
+    get_input(buffer);
+    write(sd, buffer, sizeof(buffer));
   }
 
   return 0;

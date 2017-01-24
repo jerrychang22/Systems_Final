@@ -55,29 +55,13 @@ int main() {
     }
   }
 
-  /*
-  int x;
-  if (fork() == 0) {
-    connection = server_connect(sd);
-    pthread_t clientInput;
-    pthread_create(&clientInput, NULL, serverWork, &connection);
-    addNewPlayer(connection);
-    exit(0);
-  } else {
-    x = client_connect("127.0.0.1", port);
-    addNewPlayer(x);
-    
-    struct clientpack args;
-    args.sd = x;
-    pthread_t serverRead;
-    pthread_create(&serverRead, NULL, clientWork, &args);
-
-  }
-  */
-
   initializePanels();
   initializeCommands();
-  while (1) {}
+  while (1) {
+    wait(1);
+    timeUpdate();
+    
+  }
 
   return 0;
 }

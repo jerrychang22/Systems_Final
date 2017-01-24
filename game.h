@@ -7,6 +7,7 @@
 #define HEALTH 1
 #define COMMAND 2
 #define PANEL 3
+#define TIMELIMIT 15
 
 typedef struct packet {
     int type;
@@ -19,10 +20,12 @@ typedef struct clientpack {
     int sd;
     char currentCommand[CHAR_LIMIT];
     char panelList[NUM_COMPONENTS][CHAR_LIMIT];
+    time_t timer;
+
     
 } clientpack;
 
-void takeInput(char buffer[], int sd);
+
 
 void *clientWork(void *arg);
 
@@ -32,8 +35,7 @@ int validateCommand(char in[]);
 
 void issueCommand(int sd);
 
-void resetTimer(int sd);
-
+int contains(char *needle, char *hay[]);
 
 //Large list of stuff
 static char *verbList[12] = {"Engage the",
@@ -58,7 +60,6 @@ static char *objectList[24] = {"Sensor array",
                         "Vortex fluctuators",
                         "Fluxtrunions",
                         "Quantum bogosort",
-                        "Photon hyperdrive",
-                        ""
+                        "Photon hyperdrive"
 };
 #endif
